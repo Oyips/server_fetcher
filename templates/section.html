@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function func(Section){
+            
+            fetch(`http://127.0.0.1:8000/section/${Section}`)
+            .then(function(response){
+                const text1 = response.text()
+                .then(function(text1){
+                    console.log(text1)
+                    document.querySelector('#content').innerHTML=text1
+                })
+            })
+        }
+        document.addEventListener("DOMContentLoaded",function(){
+           document.querySelectorAll("button").forEach(function(button){
+            button.onclick=function(){
+                func(this.dataset.section)
+            }
+           }) 
+        })
+    </script>
+</head>
+<body>
+    <h1>Hello</h1>
+    <button data-section="1">Section 1</button>
+    <button data-section="2">Section 2</button>
+    <button data-section="3">Section 3</button>
+    <div id="content"></div>
+</body>
+</html>
